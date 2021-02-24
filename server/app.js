@@ -13,10 +13,36 @@ var position = {
     y: 200
 };
 
+
 Socketio.on("connection", socket => {
     console.log("emitting");
 
     socket.emit("position", position);
+    socket.on("move", direction => {
+
+        const moveAmount = 5;
+
+        switch(direction) {
+            case 'right':
+                position.x = position.x + moveAmount;
+            break;
+            case 'left':
+                position.x = position.x - moveAmount;
+
+            break;
+            case 'up':
+                position.y = position.y - moveAmount;
+
+            break;
+            case 'down':
+                position.y = position.y + moveAmount;
+
+            break;
+            default:
+                break;
+        }
+        Socketio.emit("position", position);
+    })
 })
 
 Http.listen(3000, () => {
