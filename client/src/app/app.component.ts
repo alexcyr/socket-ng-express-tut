@@ -23,11 +23,13 @@ export class AppComponent implements OnInit {
     this.context = this.gameCanvas.nativeElement.getContext("2d");
 
     this.socket.on("position", position => {
-      console.log('huh');
       this.context.clearRect(0,0,this.gameCanvas.nativeElement.width, this.gameCanvas.nativeElement.height);
       this.context.fillRect(position.x, position.y, 20, 20);
-
     })
 
+  }
+
+  public move(direction: string) {
+    this.socket.emit("move", direction);
   }
 }
