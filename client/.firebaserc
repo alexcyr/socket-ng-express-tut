@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "minigamestadium"
+  },
+  "targets": {
+    "minigamestadium": {
+      "hosting": {
+        "client": [
+          "minigamestadium"
+        ]
+      }
+    }
+  }
+}
