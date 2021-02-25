@@ -1,8 +1,9 @@
+const functions = require("firebase-functions");
 const Express = require("express")();
 const Http = require("http").Server(Express);
 const Socketio = require("socket.io")(Http, {
     cors: {
-      origin: "http://localhost:4200",
+      origin: "https://minigamestadium.web.app",
       credentials: true
     }
   });
@@ -36,7 +37,7 @@ Socketio.on("connection", socket => {
             case 'down':
                 position.y = position.y + moveAmount;
             break;
-
+            
             default:
                 break;
         }
@@ -44,4 +45,8 @@ Socketio.on("connection", socket => {
     })
 })
 
-Http.listen(process.env.port);
+Http.listen(3000, () => {
+    console.log("listening at port :3000...");
+});
+
+exports.app = functions.https.onRequest(Socketio);
